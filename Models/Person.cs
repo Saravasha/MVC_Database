@@ -1,13 +1,19 @@
 ﻿using System.ComponentModel.DataAnnotations;
-namespace MVC_Data
+
+namespace MVC_Data.Models
 {
     public class Person
     {
-        
+        [Required]
+        [Range(0, 100)]
         public int Id { get; set; }
-        public string? Name { get; set; }
+        [Required]
+        public string Name { get; set; }
+        [Required]
         [Display(Name = "Phone Number")]
-        public string? PhoneNumber { get; set; }
-        public string? City { get; set; }
+        public string PhoneNumber { get; set; }
+        [Required]
+        public string City { get; set; }
+
     }
 }
