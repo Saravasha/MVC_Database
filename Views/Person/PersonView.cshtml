@@ -25,39 +25,23 @@
 <br />
 <p>@ViewBag.Statement</p>
 
-
 @if (@Model != null)
 { 
     <table class="table">
         <thead>
             <tr>
-                <th asp-for="model => NewPerson.Name" value="NewPerson.Name">
+                <th asp-for="model.Name" value="Name">
                 </th>
-                <th asp-for="model => NewPerson.PhoneNumber" value="NewPerson.PhoneNumber">
+                <th asp-for="model.PhoneNumber" value="PhoneNumber">
                 </th>
-                <th asp-for="model => NewPerson.City" value="NewPerson.City">
+                <th asp-for="model.City" value="City">
                 </th>
             </tr>
         </thead>
-        <tbody>
-            @foreach (var c in Model.People)
-            {
-                <tr>
-                    <td asp-for="@c.Name">@(c.Name)
-                    </td>
-                    <td asp-for="@c.PhoneNumber">@(c.PhoneNumber)
-                    </td>
-                    <td asp-for="@c.City">@(c.City)
-
-                    </td>
-                    <td>
-                        @*Skickar in id och namn till Delete funktionen*@
-                        <a asp-controller="Person" asp-action="DeletePerson" asp-route-id="@(c.Id)" asp-route-name="@(c.Name)" >Delete
-                        </a>
-                    </td>
-                </tr>
-            }
-        </tbody>
+        @foreach (var item in Model.People)
+        {
+            <partial name="_PersonRowPartial" model=@item />
+        }
     </table>
 
 }

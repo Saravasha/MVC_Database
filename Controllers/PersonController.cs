@@ -66,7 +66,7 @@ namespace MVC_Data.Controllers
             return View("PersonView", person);
         }
 
-        public IActionResult DeletePerson(int id, string name)
+        public IActionResult DeletePerson(Person mod)
         {
             static string OrdinalSuffixGetter(int id)
             {
@@ -79,13 +79,13 @@ namespace MVC_Data.Controllers
                 if (number.EndsWith("3")) return "rd";
                 return "th";
             }
-            if (!id.Equals(null))
+            if (!mod.Id.Equals(null))
             {
                 try
                 {
-                    Person? p = person.People.FirstOrDefault(p => p.Id == id);
+                    Person? p = person.People.FirstOrDefault(p => p.Id == mod.Id);
                     person.People.Remove(p);
-                    ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
+                    ViewBag.Statement = $" OMG! They killed {mod.Name} the {mod.Id}{OrdinalSuffixGetter(mod.Id)}! You bastards!";
 
                 }
                 catch (ArgumentOutOfRangeException aa)

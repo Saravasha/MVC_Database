@@ -1,0 +1,15 @@
+﻿@model MVC_Data.Models.Person
+
+@if(@Model != null){
+    <tr>
+        <td asp-for="@Model.Name">@Model.Name</td>
+        <td asp-for="@Model.PhoneNumber">@Model.PhoneNumber</td>
+        <td asp-for="@Model.City">@Model.City</td>
+        <td>
+            @*Skickar in id och namn till Delete funktionen*@
+            <a asp-controller="Person" asp-action="DeletePerson" model=@mod>
+                Delete
+            </a>
+        </td>
+    </tr>
+}
