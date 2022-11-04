@@ -83,8 +83,8 @@ namespace MVC_Data.Controllers
             {
                 try
                 {
-                    
-                    person.People.RemoveAt(id - id);
+                    Person? p = person.People.FirstOrDefault(p => p.Id == id);
+                    person.People.Remove(p);
                     ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
 
                 }

@@ -31,41 +31,34 @@
     <table class="table">
         <thead>
             <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.NewPerson.Name)
+                <th asp-for="model => NewPerson.Name" value="NewPerson.Name">
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NewPerson.PhoneNumber)
+                <th asp-for="model => NewPerson.PhoneNumber" value="NewPerson.PhoneNumber">
                 </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NewPerson.City)
+                <th asp-for="model => NewPerson.City" value="NewPerson.City">
                 </th>
-
             </tr>
         </thead>
         <tbody>
             @foreach (var c in Model.People)
             {
                 <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => c.Name)
+                    <td asp-for="@c.Name">@(c.Name)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => c.PhoneNumber)
+                    <td asp-for="@c.PhoneNumber">@(c.PhoneNumber)
                     </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => c.City)
+                    <td asp-for="@c.City">@(c.City)
+
                     </td>
                     <td>
                         @*Skickar in id och namn till Delete funktionen*@
-                        @Html.ActionLink("Delete", "DeletePerson", "Person", new {  
-                            id=c.Id,name=c.Name  })
+                        <a asp-controller="Person" asp-action="DeletePerson" asp-route-id="@(c.Id)" asp-route-name="@(c.Name)" >Delete
+                        </a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
-    <script> console.log(ViewBag.Log) </script >
 
 }
 else
