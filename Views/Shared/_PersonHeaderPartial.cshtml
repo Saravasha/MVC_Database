@@ -1,0 +1,31 @@
+﻿@model MVC_Data.ViewModels.PersonViewModel
+
+@{
+    //ViewData["Title"] = "Header";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>@ViewBag.Title</h1>*@
+
+@*<p>@ViewBag.Statement</p>*@
+
+@if (@Model != null)
+{
+    <div class="flex-column">
+<div asp-for="model.Name" value="Name">Name
+</div><div asp-for="model.PhoneNumber" value="PhoneNumber">Phone Number</div>
+<div asp-for="model.City" value="City">City</div>
+
+@foreach (var item in Model.People)
+
+    {
+    <div>
+    <partial name="_PersonRowPartial" model="@item"  />
+    </div>
+    }
+    </div>
+}
+else
+{
+    <p>No results found.</p>
+}

@@ -1,15 +1,18 @@
 ﻿@model MVC_Data.Models.Person
 
+@{
+    //ViewData["Title"] = "Row";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>@ViewBag.Title</h1>*@
+
 @if(@Model != null){
-    <tr>
-        <td asp-for="@Model.Name">@Model.Name</td>
-        <td asp-for="@Model.PhoneNumber">@Model.PhoneNumber</td>
-        <td asp-for="@Model.City">@Model.City</td>
-        <td>
-            @*Skickar in id och namn till Delete funktionen*@
-            <a asp-controller="Person" asp-action="DeletePerson" model=@mod>
-                Delete
-            </a>
-        </td>
-    </tr>
+<div>
+    <div asp-for="@Model.Name">@Model.Name</div>
+    <div asp-for="@Model.PhoneNumber">@Model.PhoneNumber</div>
+    <div asp-for="@Model.City">@Model.City</div>
+    <a asp-controller=" Person" asp-action="DeletePerson" asp-route-id="@Model.Id" asp-route-name="@Model.Name">Delete</a>
+    
+</div>
 }
