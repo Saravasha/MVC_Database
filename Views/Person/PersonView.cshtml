@@ -25,6 +25,8 @@
 <br />
 <p>@ViewBag.Statement</p>
 
+<button id="People">
+
 @if (@Model != null)
 {
 
@@ -37,6 +39,9 @@ else
 {
     <p>No results found.</p>
 }
+</button>
+<button id="details">Details</button>
+<button id="delete">Delete</button>
 <div>
     <a asp-controller="Person" asp-action="PersonView">Refresh Table</a>
 </div>
