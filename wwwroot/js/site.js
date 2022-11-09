@@ -10,13 +10,13 @@
 
 function ListAllPeople()
 {
-    var peopleList = $('div#peopleList');
+    var peopleList = $('#peopleList');
     $.ajax({
         type: "GET",
         url: "Person/PersonView",
         success: function (peopleList) {
             console.log(peopleList);
-            $("div#peopleList")
+            $("#peopleList").html();
         }
     })
 }
