@@ -29,7 +29,7 @@ function GetDetails() {
         url: "Person/PersonView",
         success: function (detailsGet) {
             console.log(detailsGet);
-            document.detailsGet
+            $("div#detailsGet")
         }
     })
 }

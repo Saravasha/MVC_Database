@@ -8,7 +8,7 @@
 <h1>@ViewBag.Title</h1>
 
 
-<form class="container" method="post" asp-action="FilterPersonCity">
+@*<form class="container" method="post" asp-action="FilterPersonCity">
     <label>Search</label><br />
     <input type="text" name="filterInput" />
     <button class="btn btn-primary" type="submit">Submit</button>
@@ -21,8 +21,8 @@
     <input type="text" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" required />
     <input type="text" asp-for="NewPerson.City" placeholder="City Name" required />
     <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-<br />
+</form>*@
+@*<br />*@
 <p>@ViewBag.Statement</p>
 
 <div id="peopleList"></div>
@@ -32,7 +32,7 @@
 </form>
 <button id="People" onclick="ListAllPeople()">People</button>
 <button id="details" onclick="GetDetails()">Details</button>
-<button id="delete" onclick="AnnihilatePerson   ()">Delete</button>
+<button id="delete" onclick="AnnihilatePerson()">Delete</button>
 <div>
     <a asp-controller="Person" asp-action="PersonView">Refresh Table</a>
 </div>

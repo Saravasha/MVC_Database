@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "People";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -37,13 +37,6 @@ else
 {
     <p>No results found.</p>
 }
-
-<button id="People" onclick="ListAllPeople()">People</button>
-<button id="details" onclick="GetDetails()">Details</button>
-<button id="delete" onclick="AnnihilatePerson   ()">Delete</button>
 <div>
     <a asp-controller="Person" asp-action="PersonView">Refresh Table</a>
 </div>
-
-
-<script src=~/js/site.js></script>

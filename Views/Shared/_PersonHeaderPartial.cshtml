@@ -27,7 +27,7 @@
             </div>
             <div class="col" asp-for="@Model.NewPerson.City">@Model.NewPerson.City
             </div>
-            <div class="col"><a asp-controller=" Person" asp-action="DeletePerson" asp-route-id="@Model.NewPerson.Id" asp-route-name="@Model.NewPerson.Name">Delete</a>
+            <div class="col"><a asp-controller="Person" asp-action="DeletePerson" asp-route-id="@Model.NewPerson.Id" asp-route-name="@Model.NewPerson.Name">Delete</a>
             </div>
         </div>
     }
