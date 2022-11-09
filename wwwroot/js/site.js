@@ -4,4 +4,50 @@
 // Write your JavaScript code.
 
 
-//alert("det funkar")
+
+
+
+
+function ListAllPeople()
+{
+    var peopleList = $('div#peopleList');
+    $.ajax({
+        type: "GET",
+        url: "Person/PersonView",
+        success: function (peopleList) {
+            console.log(peopleList);
+            $("div#peopleList")
+        }
+    })
+}
+
+function GetDetails() {
+
+    var detailsGet = $('#detailsGet');
+    $.ajax({
+        type: "POST",
+        url: "Person/PersonView",
+        success: function (detailsGet) {
+            console.log(detailsGet);
+            document.detailsGet
+        }
+    })
+}
+
+
+function AnnihilatePerson() {
+
+    var annihilate = $('#annihilate');
+    $.ajax({
+        type: "POST",
+        url: "Person/PersonView",
+        success: function (annihilate) {
+            console.log(annihilate);
+            document.annihilate
+        }
+    })
+
+}
+
+
+

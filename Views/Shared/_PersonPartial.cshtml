@@ -1,0 +1,38 @@
+﻿@model MVC_Data.ViewModels.PersonViewModel
+@{
+    //ViewData["Title"] = "Header";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<h1>@ViewBag.Title</h1>*@
+
+@*<p>@ViewBag.Statement</p>*@
+
+@if (@Model != null)
+{
+    <div class="row">
+        <div class="col" asp-for="model.Name" value="Name">Name
+        </div>
+        <div class="col" asp-for="model.PhoneNumber" value="PhoneNumber">Phone Number</div>
+        <div class="col" asp-for="model.City" value="City">City</div>
+        </div>
+
+    @foreach (var item in Model.People)
+    {
+        <div class="row">
+            <div class="col" asp-for="@Model.NewPerson.Name">
+                @Model.NewPerson.Name
+            </div>
+            <div class="col" asp-for="@Model.NewPerson.PhoneNumber">@Model.NewPerson.PhoneNumber
+            </div>
+            <div class="col" asp-for="@Model.NewPerson.City">@Model.NewPerson.City
+            </div>
+            <div class="col"><a asp-controller=" Person" asp-action="DeletePerson" asp-route-id="@Model.NewPerson.Id" asp-route-name="@Model.NewPerson.Name">Delete</a>
+            </div>
+        </div>
+    }
+}
+else
+{
+    <p>No results found.</p>
+}

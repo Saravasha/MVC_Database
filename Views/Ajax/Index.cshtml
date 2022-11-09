@@ -1,8 +1,8 @@
 ﻿@model MVC_Data.ViewModels.PersonViewModel
 
 @{
-    ViewData["Title"] = "People";
-    //Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Ajax";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -10,7 +10,7 @@
 
 <form class="container" method="post" asp-action="FilterPersonCity">
     <label>Search</label><br />
-    <input type="text" name="filterInput"/>
+    <input type="text" name="filterInput" />
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 
@@ -25,19 +25,11 @@
 <br />
 <p>@ViewBag.Statement</p>
 
-
-@if (@Model != null)
-{
-
-
-<partial name="_PersonHeaderPartial" model=@Model/>
-    
-}
-else
-{
-    <p>No results found.</p>
-}
-
+<div id="peopleList"></div>
+<form>
+    <input type="number" />
+    <input type="submit" class="btn-outline-primary"/>
+</form>
 <button id="People" onclick="ListAllPeople()">People</button>
 <button id="details" onclick="GetDetails()">Details</button>
 <button id="delete" onclick="AnnihilatePerson   ()">Delete</button>
