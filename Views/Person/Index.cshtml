@@ -31,6 +31,7 @@
 
 
 <partial name="_PersonHeaderPartial" model=@Model/>
+<partial name="_PersonBodyPartial" model=@Model />
     
 }
 else
@@ -38,5 +39,5 @@ else
     <p>No results found.</p>
 }
 <div>
-    <a asp-controller="Person" asp-action="PersonView">Refresh Table</a>
+    <a asp-controller="Person" asp-action="Index">Refresh Table</a>
 </div>

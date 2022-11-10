@@ -1,9 +1,7 @@
 ﻿@model MVC_Data.ViewModels.PersonViewModel
 
 @{
-    //ViewData["Title"] = "Header";
 
-    //Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 @*<h1>@ViewBag.Title</h1>*@
@@ -13,18 +11,16 @@
 @if (@Model != null)
 {
     <div class="row">
-        <div class="col" asp-for="model.Name" value="Name"><b>Name</b></div>
-        <div class="col" asp-for="model.PhoneNumber" value="PhoneNumber"><b>Phone Number</b></div>
-        <div class="col" asp-for="model.City" value="City"><b>City</b></div>
-        <div class="col"></div>
+        <div class="col">
+            @(Html.DisplayNameFor(model => model.NewPerson.Id))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Name))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City))
+        </div>
     </div>
-
-@foreach (var item in Model.People)
-
-    {
-    <partial name="_PersonBodyPartial" model="@item"  />
-    }
-
 }
 else
 {

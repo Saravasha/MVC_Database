@@ -2,8 +2,11 @@
 
 @{
     ViewData["Title"] = "Ajax";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+
 }
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script>
 
 <h1>@ViewBag.Title</h1>
 
@@ -26,14 +29,14 @@
 <p>@ViewBag.Statement</p>
 
 <form class="form-control">
-    <input type="number" placeholder="Give me an ID" required />
-    <input type="submit" class="btn btn-primary btn-group btn" onsubmit="GetDetails()" value="Get the Deets" />
-    <input type="submit" id="delete" onsubmit="AnnihilatePerson()" class="btn-danger btn-group btn" value="Delete" />
+    <input id="inputVal" type="number" placeholder="Give me an ID" required />
+    <input type="button" class="btn btn-primary btn-group btn" onclick="GetDetails()" value="Get the Deets"/>
+    <input type="button" onclick="AnnihilatePerson()" class="btn-danger btn-group btn" value="Delete"/>
 </form>
 <br />
-<input type="submit" id="People" onsubmit="ListAllPeople()" class="btn btn-primary form-control" value="People"/>
+<input type="button" id="People" onclick="ListAllPeople()" class="btn btn-primary form-control" value="People"/>
 
 <div id="peopleList"></div>
 
-<script src=~/js/site.js></script>
+
 

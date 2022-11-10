@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Data.ViewModels;
 using MVC_Data.Models;
-using MVC_Data.Controllers;
 
 namespace MVC_Data.Controllers
 {
@@ -9,18 +8,19 @@ namespace MVC_Data.Controllers
     {
         public static PersonViewModel person = new PersonViewModel();
 
-        [HttpGet]
+
         public IActionResult Index()
         {
             return View();
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult GetPeople() { 
             
-            return PartialView("_PersonHeaderPartial", person); 
+            return PartialView("_PersonPartial", person); 
         }
 
+        [HttpPost]
         public IActionResult GetPeople(int id)
         {
             var filteredData = person.People.Where(x => x.Id == id).ToList();
@@ -33,19 +33,19 @@ namespace MVC_Data.Controllers
 
             if (filteredModel.People.Count == 0)
             {
-                return View("_PersonHeaderPartial");
+                return View("_PersonPartial");
             }
 
-            return View("_PersonHeaderPartial", filteredModel);
+            return View("_PersonPartial", filteredModel);
 
         }
 
         [HttpPost]
-        public IActionResult DeletePeople(int id, string name)
+        public IActionResult AnnihilatePerson(int id)
         {
-            static string OrdinalSuffixGetter(int id)
+            static string OrdinalSuffixGetter(int Id)
             {
-                string number = id.ToString();
+                string number = Id.ToString();
                 if (number.EndsWith("11")) return "th";
                 if (number.EndsWith("12")) return "th";
                 if (number.EndsWith("13")) return "th";
@@ -60,7 +60,11 @@ namespace MVC_Data.Controllers
                 {
                     Person? p = person.People.FirstOrDefault(p => p.Id == id);
                     person.People.Remove(p);
-                    ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
+                    if(p!=null)
+                    {
+                        
+                    ViewBag.Statement = $" OMG! They killed {p.Name} the {p.Id}{OrdinalSuffixGetter(p.Id)}! You bastards!";
+                    }
 
                 }
                 catch (ArgumentOutOfRangeException aa)
@@ -70,10 +74,10 @@ namespace MVC_Data.Controllers
             }
             else
             {
-                ViewBag.Statement = "Unable to remove person!";
+                ViewBag.Statement = "Unable to comply!";
             }
 
-            return View("_PersonHeaderPartial", person);
+            return View("_PersonPartial", person);
         }
     }
 

@@ -3,50 +3,42 @@
 
 // Write your JavaScript code.
 
-
-
-
-
-
 function ListAllPeople()
 {
-    var peopleList = $('#peopleList');
     $.ajax({
         type: "GET",
-        url: "Person/PersonView",
+        url: "Ajax/GetPeople",
         success: function (peopleList) {
-            console.log(peopleList);
-            $("#peopleList").html();
+            console.log("GetPeople: peopleList = ", peopleList);
+            $("div#peopleList").html(peopleList);
         }
     })
 }
 
 function GetDetails() {
-
-    var detailsGet = $('#detailsGet');
+    var inputVal = $('input#inputVal').val();
     $.ajax({
         type: "POST",
-        url: "Person/PersonView",
+        url: `Ajax/GetPeople/${inputVal}`,
         success: function (detailsGet) {
             console.log(detailsGet);
-            $("div#detailsGet")
+            console.log(inputVal);
+            $("div#peopleList").html(detailsGet)
         }
     })
 }
 
-
 function AnnihilatePerson() {
-
-    var annihilate = $('#annihilate');
+    var inputVal = $('input#inputVal').val();
     $.ajax({
         type: "POST",
-        url: "Person/PersonView",
+        url: `Ajax/AnnihilatePerson/${inputVal}`,
         success: function (annihilate) {
             console.log(annihilate);
-            document.annihilate
+            console.log(inputVal);
+            $("div#peopleList").html(annihilate)
         }
     })
-
 }
 
 

@@ -11,7 +11,7 @@ namespace MVC_Data.Controllers
 
         public static int adder = person.People.Count();
 
-        public IActionResult PersonView()
+        public IActionResult Index()
         {
             return View(person);
         }
@@ -22,13 +22,11 @@ namespace MVC_Data.Controllers
 
             if (filterInput == "")
             {
-                return View("PersonView", person);
+                return View("Index", person);
             }
 
 
-            var filteredData = person.People.Where(x => (x.City == filterInput)
-                                                || (x.Name == filterInput)).ToList();
-
+            var filteredData = person.People.Where(x => (x.City == filterInput) || (x.Name == filterInput)).ToList();
 
             PersonViewModel filteredModel = new PersonViewModel();
 
@@ -37,12 +35,12 @@ namespace MVC_Data.Controllers
 
             if (filteredModel.People.Count == 0)
             {
-                return View("PersonView");
+                return View("Index");
             }
 
 
 
-            return View("PersonView", filteredModel);
+            return View("Index", filteredModel);
         }
 
         public IActionResult AddPerson(PersonViewModel m)
@@ -64,7 +62,7 @@ namespace MVC_Data.Controllers
                 ViewBag.Statement = "Please fill in the form above!";
             }
 
-            return View("PersonView", person);
+            return View("Index", person);
         }
 
         public IActionResult DeletePerson(int id, string name)
@@ -99,7 +97,7 @@ namespace MVC_Data.Controllers
                 ViewBag.Statement = "Unable to remove person!";
             }
 
-            return View("PersonView", person);
+            return View("Index", person);
         }
 
     }
