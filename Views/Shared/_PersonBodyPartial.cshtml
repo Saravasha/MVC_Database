@@ -1,10 +1,5 @@
 ﻿@model MVC_Data.ViewModels.PersonViewModel
 
-@{
-
-}
-
-@*<h1>@ViewBag.Title</h1>*@
 
 @if(@Model != null){
 
@@ -25,10 +20,6 @@
             </div>
             <div class="col"><label asp-for="@item.City"/>@item.City
             </div>
-@*            <div class="col">
-                <a asp-controller="Person" asp-action="DeletePerson" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete
-                </a>
-            </div>*@
         </div>
         }
     </div>
