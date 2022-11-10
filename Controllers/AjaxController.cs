@@ -2,6 +2,7 @@
 using MVC_Data.ViewModels;
 using MVC_Data.Models;
 
+
 namespace MVC_Data.Controllers
 {
     public class AjaxController : Controller
@@ -11,7 +12,7 @@ namespace MVC_Data.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         [HttpGet]
@@ -33,10 +34,10 @@ namespace MVC_Data.Controllers
 
             if (filteredModel.People.Count == 0)
             {
-                return View("_PersonPartial");
+                return PartialView("_PersonPartial");
             }
 
-            return View("_PersonPartial", filteredModel);
+            return PartialView("_PersonPartial", filteredModel);
 
         }
 
@@ -59,11 +60,13 @@ namespace MVC_Data.Controllers
                 try
                 {
                     Person? p = person.People.FirstOrDefault(p => p.Id == id);
-                    person.People.Remove(p);
                     if(p!=null)
                     {
-                        
+                    person.People.Remove(p);   
                     ViewBag.Statement = $" OMG! They killed {p.Name} the {p.Id}{OrdinalSuffixGetter(p.Id)}! You bastards!";
+                    } else if (p!=null)
+                    {
+                        ViewBag.Statement = "$Stop, he's already dead!!";
                     }
 
                 }
@@ -77,7 +80,7 @@ namespace MVC_Data.Controllers
                 ViewBag.Statement = "Unable to comply!";
             }
 
-            return View("_PersonPartial", person);
+            return PartialView("_PersonPartial", person);
         }
     }
 

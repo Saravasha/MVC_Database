@@ -10,28 +10,12 @@
 
 <h1>@ViewBag.Title</h1>
 
-
-@*<form class="container" method="post" asp-action="FilterPersonCity">
-    <label>Search</label><br />
-    <input type="text" name="filterInput" />
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
-
-<form class="container" method="post" asp-action="AddPerson">
-    <label>New User Form:</label>
-    <br />
-    <input type="text" asp-for="NewPerson.Name" placeholder="Full Name" required />
-    <input type="text" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" required />
-    <input type="text" asp-for="NewPerson.City" placeholder="City Name" required />
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>*@
-@*<br />*@
 <p>@ViewBag.Statement</p>
 
 <form class="form-control">
-    <input id="inputVal" type="number" placeholder="Give me an ID" required />
-    <input type="button" class="btn btn-primary btn-group btn" onclick="GetDetails()" value="Get the Deets"/>
-    <input type="button" onclick="AnnihilatePerson()" class="btn-danger btn-group btn" value="Delete"/>
+    <input id="inputVal" type="number" placeholder="Give me an ID" required min="0" />
+    <input type="button" class="btn btn-primary btn-group btn" onclick="GetDetails()" value="Get the Deets" required/>
+    <input type="button" onclick="AnnihilatePerson()" class="btn-danger btn-group btn" value="Delete" required/>
 </form>
 <br />
 <input type="button" id="People" onclick="ListAllPeople()" class="btn btn-primary form-control" value="People"/>
