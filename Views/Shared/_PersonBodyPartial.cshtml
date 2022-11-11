@@ -1,0 +1,26 @@
+﻿@model MVC_Data.ViewModels.PersonViewModel
+
+
+@if(@Model != null){
+
+    <div class="container">
+
+        @foreach (var item in Model.People)
+
+        {
+
+        <div class="row">
+                <div class="col">
+                    <label asp-for="@item.Id" />@item.Id
+                </div>
+            <div class="col">
+                <label asp-for="@item.Name"/>@item.Name
+            </div>
+            <div class="col"><label asp-for="@item.PhoneNumber"/>@item.PhoneNumber
+            </div>
+            <div class="col"><label asp-for="@item.City"/>@item.City
+            </div>
+        </div>
+        }
+    </div>
+}

@@ -1,0 +1,43 @@
+﻿@model MVC_Data.ViewModels.PersonViewModel
+
+@{
+    ViewData["Title"] = "People";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewBag.Title</h1>
+
+
+<form class="container" method="post" asp-action="FilterPersonCity">
+    <label>Search</label><br />
+    <input type="text" name="filterInput"/>
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+
+<form class="container" method="post" asp-action="AddPerson">
+    <label>New User Form:</label>
+    <br />
+    <input type="text" asp-for="NewPerson.Name" placeholder="Full Name" required />
+    <input type="text" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" required />
+    <input type="text" asp-for="NewPerson.City" placeholder="City Name" required />
+    <button class="btn btn-primary" type="submit">Submit</button>
+</form>
+<br />
+<p>@ViewBag.Statement</p>
+
+
+@if (@Model != null)
+{
+
+
+<partial name="_PersonHeaderPartial" model=@Model/>
+<partial name="_PersonBodyPartial" model=@Model />
+    
+}
+else
+{
+    <p>No results found.</p>
+}
+<div>
+    <a asp-controller="Person" asp-action="Index">Refresh Table</a>
+</div>

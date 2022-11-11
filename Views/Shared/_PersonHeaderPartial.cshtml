@@ -1,0 +1,28 @@
+﻿@model MVC_Data.ViewModels.PersonViewModel
+
+@{
+
+}
+
+@*<h1>@ViewBag.Title</h1>*@
+
+@*<p>@ViewBag.Statement</p>*@
+
+@if (@Model != null)
+{
+    <div class="row">
+        <div class="col">
+            @(Html.DisplayNameFor(model => model.NewPerson.Id))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Name))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))
+        </div>
+        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City))
+        </div>
+    </div>
+}
+else
+{
+    <p>No results found.</p>
+}

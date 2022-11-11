@@ -1,98 +1,105 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Data.ViewModels;
+using MVC_Data.Models;
 
 
 namespace MVC_Data.Controllers
 {
     public class PersonController : Controller
     {
-        public static PeopleViewModel iPVModel = new PeopleViewModel();
+        public static PersonViewModel person = new PersonViewModel();
 
+        public static int adder = person.People.Count();
 
-        // Used to assign id's to newly created persons added to the list.
-
-        public static int addId = iPVModel.People.Count();
-
-        public IActionResult PeopleView()
+        public IActionResult Index()
         {
-            return View(iPVModel);
+            return View(person);
         }
 
         [HttpPost]
-        // Depending on the input, the persons that have the city and name attributes
-        // will be shown when submitting the form.
-        public IActionResult FilterPersonsOnCity(string user_input)
+        public IActionResult FilterPersonCity(string filterInput)
         {
 
-            if (user_input == "")
+            if (filterInput == "")
             {
-                return View("PeopleView", iPVModel);
+                return View("Index", person);
             }
 
 
-            var filteredData = iPVModel.People.Where(x => (x.City == user_input)
-                                                || (x.Name == user_input)).ToList();
+            var filteredData = person.People.Where(x => (x.City == filterInput) || (x.Name == filterInput)).ToList();
 
-
-            PeopleViewModel filteredModel = new PeopleViewModel();
+            PersonViewModel filteredModel = new PersonViewModel();
 
 
             filteredModel.People = filteredData;
 
             if (filteredModel.People.Count == 0)
             {
-                return View("PeopleView");
+                return View("Index");
             }
 
 
 
-            return View("PeopleView", filteredModel);
+            return View("Index", filteredModel);
         }
 
-
-        public IActionResult AddPerson(PeopleViewModel m)
+        public IActionResult AddPerson(PersonViewModel m)
         {
             if (ModelState.IsValid)
             {
 
-                iPVModel.People.Add(new Person()
+                person.People.Add(new Person()
                 {
-                    Id = ++addId,
+                    Id = ++adder,
                     Name = m.NewPerson.Name,
                     PhoneNumber = m.NewPerson.PhoneNumber,
                     City = m.NewPerson.City
                 }
                 );
-                ViewBag.Statement = "The following person has been added: " + m.NewPerson.Name;
+                ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
+            }
+            else {
+                ViewBag.Statement = "Please fill in the form above!";
+            }
+
+            return View("Index", person);
+        }
+
+        public IActionResult DeletePerson(int id, string name)
+        {
+            static string OrdinalSuffixGetter(int id)
+            {
+                string number = id.ToString();
+                if (number.EndsWith("11")) return "th";
+                if (number.EndsWith("12")) return "th";
+                if (number.EndsWith("13")) return "th";
+                if (number.EndsWith("1")) return "st";
+                if (number.EndsWith("2")) return "nd";
+                if (number.EndsWith("3")) return "rd";
+                return "th";
+            }
+            if (!id.Equals(null))
+            {
+                try
+                {
+                    Person? p = person.People.FirstOrDefault(p => p.Id == id);
+                    person.People.Remove(p);
+                    ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
+
+                }
+                catch (ArgumentOutOfRangeException aa)
+                {
+                    ViewBag.Statement = aa.Message;
+                }
             }
             else
-            {
-
-
-                ViewBag.Statement = "Please fill in the form above!";
-
-            }
-
-            return View("PeopleView", iPVModel);
-        }
-        public IActionResult DeletePerson(int id)
-        {
-            try
-            {
-                iPVModel.People.RemoveAt(id - 1);
-                ViewBag.Statement = $"A person with id {id} has been removed.";
-
-            }
-            catch (ArgumentOutOfRangeException aa)
-            {
-                ViewBag.Statement = aa.Message;
-            }
-            finally
             {
                 ViewBag.Statement = "Unable to remove person!";
             }
 
-            return View("PeopleView", iPVModel);
+            return View("Index", person);
         }
+
     }
+
 }
