@@ -6,6 +6,7 @@ namespace MVC_Data.Models
     {
         [Required]
         [Range(0, 100)]
+        [Key]
         public int Id { get; set; }
         [Required]
         public string? Name { get; set; }
