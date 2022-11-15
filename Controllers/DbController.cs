@@ -1,31 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MVC_Data.Models;
 using MVC_Database.Data;
 
 namespace MVC_Database.Controllers
 {
-    public class PeopleEFController : Controller
+    public class DbController : Controller
     {
-        private readonly MVC_DatabaseContext _context;
+        private readonly MVC_DbContext _context;
 
-        public PeopleEFController(MVC_DatabaseContext context)
+        public DbController(MVC_DbContext context)
         {
             _context = context;
         }
 
-        // GET: PeopleEF
+        // GET: Db
         public async Task<IActionResult> Index()
         {
               return View(await _context.Person.ToListAsync());
         }
 
-        // GET: PeopleEF/Details/5
+        // GET: Db/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Person == null)
@@ -43,13 +38,13 @@ namespace MVC_Database.Controllers
             return View(person);
         }
 
-        // GET: PeopleEF/Create
+        // GET: Db/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: PeopleEF/Create
+        // POST: Db/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -65,7 +60,7 @@ namespace MVC_Database.Controllers
             return View(person);
         }
 
-        // GET: PeopleEF/Edit/5
+        // GET: Db/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Person == null)
@@ -81,7 +76,7 @@ namespace MVC_Database.Controllers
             return View(person);
         }
 
-        // POST: PeopleEF/Edit/5
+        // POST: Db/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -116,7 +111,7 @@ namespace MVC_Database.Controllers
             return View(person);
         }
 
-        // GET: PeopleEF/Delete/5
+        // GET: Db/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Person == null)
@@ -134,14 +129,14 @@ namespace MVC_Database.Controllers
             return View(person);
         }
 
-        // POST: PeopleEF/Delete/5
+        // POST: Db/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Person == null)
             {
-                return Problem("Entity set 'MVC_DatabaseContext.Person'  is null.");
+                return Problem("Entity set 'MVC_DbContext.Person'  is null.");
             }
             var person = await _context.Person.FindAsync(id);
             if (person != null)

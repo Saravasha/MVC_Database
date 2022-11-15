@@ -3,16 +3,18 @@ using MVC_Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
 namespace MVC_Database.Migrations
 {
-    [DbContext(typeof(MVC_DatabaseContext))]
-    partial class MVC_DatabaseContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(MVC_DbContext))]
+    [Migration("20221115151122_Seeding People to DB")]
+    partial class SeedingPeopletoDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,6 +46,29 @@ namespace MVC_Database.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Person");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            City = "Gothenburg",
+                            Name = "Siavash Gosheh",
+                            PhoneNumber = "xxxx-xxx666"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            City = "Central Pennsylvania",
+                            Name = "Maxwell T Bird",
+                            PhoneNumber = "Mr. Max Tv @ Youtube"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            City = "Gdansk",
+                            Name = "Nergal",
+                            PhoneNumber = "666"
+                        });
                 });
 #pragma warning restore 612, 618
         }

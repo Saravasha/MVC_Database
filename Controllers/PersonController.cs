@@ -7,9 +7,9 @@ namespace MVC_Data.Controllers
 {
     public class PersonController : Controller
     {
-        public static PersonViewModel person = new PersonViewModel();
+        private static PersonViewModel person = new PersonViewModel();
 
-        public static int adder = person.People.Count();
+        private static int adder = person.People.Count();
 
         public IActionResult Index()
         {
