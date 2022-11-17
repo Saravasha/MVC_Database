@@ -1,20 +1,36 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MVC_Data.ViewModels;
 using MVC_Data.Models;
-
+using MVC_Database.Data;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using MVC_Database.ViewModels;
 
 namespace MVC_Data.Controllers
 {
     public class PersonController : Controller
     {
-        private static PersonViewModel person = new PersonViewModel();
+        
+        private static PeopleViewModel peopleViewModel = new PeopleViewModel();
+        readonly MVC_DbContext _context; // creates a readonly of DbContext
 
-        private static int adder = person.People.Count();
+        public PersonController(MVC_DbContext context)
+        {
+            _context = context;
+        }
+
+  
 
         public IActionResult Index()
         {
-            return View(person);
+            ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
+            peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).ToList();
+
+
+
+            return View(peopleViewModel);
         }
+ 
 
         [HttpPost]
         public IActionResult FilterPersonCity(string filterInput)
@@ -22,13 +38,13 @@ namespace MVC_Data.Controllers
 
             if (filterInput == "")
             {
-                return View("Index", person);
+                return View("Index", peopleViewModel);
             }
 
 
-            var filteredData = person.People.Where(x => (x.City == filterInput) || (x.Name == filterInput)).ToList();
+            var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.Name.Contains(filterInput))).Include(c => c.City).ToList();
 
-            PersonViewModel filteredModel = new PersonViewModel();
+            PeopleViewModel filteredModel = new PeopleViewModel();
 
 
             filteredModel.People = filteredData;
@@ -48,21 +64,24 @@ namespace MVC_Data.Controllers
             if (ModelState.IsValid)
             {
 
-                person.People.Add(new Person()
+                _context.People.Add(new Person()
                 {
-                    Id = ++adder,
-                    Name = m.NewPerson.Name,
-                    PhoneNumber = m.NewPerson.PhoneNumber,
-                    City = m.NewPerson.City
-                }
-                );
-                ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
+                   
+                    Name = m.Name,
+                    PhoneNumber = m.PhoneNumber,
+                    CityId = m.CityId,
+
+
+                });
+                _context.SaveChanges();
+
+                ViewBag.Statement = $"{m.Name} has been added to the table!";
             }
             else {
                 ViewBag.Statement = "Please fill in the form above!";
             }
 
-            return View("Index", person);
+            return View("Index", peopleViewModel);
         }
 
         public IActionResult DeletePerson(int id, string name)
@@ -82,8 +101,9 @@ namespace MVC_Data.Controllers
             {
                 try
                 {
-                    Person? p = person.People.FirstOrDefault(p => p.Id == id);
-                    person.People.Remove(p);
+                    Person? p = peopleViewModel.People.FirstOrDefault(p => p.Id == id);
+                    _context.People.Remove(p);
+                    _context.SaveChanges();
                     ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
 
                 }
@@ -97,7 +117,7 @@ namespace MVC_Data.Controllers
                 ViewBag.Statement = "Unable to remove person!";
             }
 
-            return View("Index", person);
+            return View("Index", peopleViewModel);
         }
 
     }

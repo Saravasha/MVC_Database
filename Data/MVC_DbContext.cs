@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC_Data.Models;
-
 namespace MVC_Database.Data
 {
     public class MVC_DbContext : DbContext
@@ -11,7 +10,9 @@ namespace MVC_Database.Data
 
         }
 
-        public DbSet<Person> Person { get; set; } = default!;
+        public DbSet<Person> People { get; set; } = default!;
+        public DbSet<City> Cities { get; set; } = default!;
+        public DbSet<Country> Countries { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -19,9 +20,18 @@ namespace MVC_Database.Data
             base.OnModelCreating(modelbuilder);
 
 
-            modelbuilder.Entity<Person>().HasData(new Person { Id = 1, Name = "Siavash Gosheh", PhoneNumber = "xxxx-xxx666", City = "Gothenburg" });
-            modelbuilder.Entity<Person>().HasData(new Person { Id = 2, Name = "Maxwell T Bird", PhoneNumber = "Mr. Max Tv @ Youtube", City = "Central Pennsylvania" });
-            modelbuilder.Entity<Person>().HasData(new Person { Id = 3, Name = "Nergal", PhoneNumber = "666", City = "Gdansk" });
+
+            modelbuilder.Entity<Country>().HasData(new Country { Id = 1, Name = "Sweden" });
+            modelbuilder.Entity<Country>().HasData(new Country { Id = 2, Name = "'Murica" });
+            modelbuilder.Entity<Country>().HasData(new Country { Id = 3, Name = "Poland" });
+
+            modelbuilder.Entity<City>().HasData(new City { Id = 1, CountryId = 1, Name = "Gothenburg" });
+            modelbuilder.Entity<City>().HasData(new City { Id = 2, CountryId = 2, Name = "Central Pennsylvania" });
+            modelbuilder.Entity<City>().HasData(new City { Id = 3, CountryId = 3, Name = "Gdansk" });
+
+            modelbuilder.Entity<Person>().HasData(new Person { Id = 1, Name = "Siavash Gosheh", PhoneNumber = "xxxx-xxx666", CityId = 1 });
+            modelbuilder.Entity<Person>().HasData(new Person { Id = 2, Name = "Maxwell T Bird", PhoneNumber = "Mr. Max Tv @ Youtube", CityId = 2 });
+            modelbuilder.Entity<Person>().HasData(new Person { Id = 3, Name = "Nergal", PhoneNumber = "666", CityId = 3 });
         }
     }
 }

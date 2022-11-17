@@ -1,4 +1,4 @@
-﻿@model MVC_Data.ViewModels.PersonViewModel
+﻿@model MVC_Data.ViewModels.PeopleViewModel
 
 @{
     ViewData["Title"] = "People";
@@ -8,21 +8,31 @@
 <h1>@ViewBag.Title</h1>
 
 
-<form class="container" method="post" asp-action="FilterPersonCity">
+<form class="container" method="post" asp-action="FilterPersonCity" asp-controller="Index">
     <label>Search</label><br />
     <input type="text" name="filterInput"/>
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
 
-<form class="container" method="post" asp-action="AddPerson">
+<form class="container" method="post" asp-action="AddPerson" asp-controller="Index">
     <label>New User Form:</label>
     <br />
     <input type="text" asp-for="NewPerson.Name" placeholder="Full Name" required />
     <input type="text" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" required />
-    <input type="text" asp-for="NewPerson.City" placeholder="City Name" required />
+    <input type="text" asp-for="NewPerson.CityId" placeholder="City Name" required />
+
+@*<br />*@
+@*<div class="form-group row">*@
+        <select asp-for="NewPerson.CityId" class="form-control" asp-items="ViewBag.CityNames">
+    <label asp-for="NewPerson.CityId" class="col-sm-1 col-form-label">City</label>
+            <option value="" selected disabled>Select City</option>
+        </select>
+        <span asp-validation-for="NewPerson.CityId"></span>
+    @*<div class="col-sm-3">
+    </div>*@
+@*</div>*@
     <button class="btn btn-primary" type="submit">Submit</button>
 </form>
-<br />
 <p>@ViewBag.Statement</p>
 
 

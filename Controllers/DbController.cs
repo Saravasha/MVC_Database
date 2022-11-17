@@ -17,18 +17,18 @@ namespace MVC_Database.Controllers
         // GET: Db
         public async Task<IActionResult> Index()
         {
-              return View(await _context.Person.ToListAsync());
+              return View(await _context.People.ToListAsync());
         }
 
         // GET: Db/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null || _context.People == null)
             {
                 return NotFound();
             }
 
-            var person = await _context.Person
+            var person = await _context.People
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (person == null)
             {
@@ -49,7 +49,7 @@ namespace MVC_Database.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,PhoneNumber,City")] Person person)
+        public async Task<IActionResult> Create(Person person)
         {
             if (ModelState.IsValid)
             {
@@ -63,12 +63,12 @@ namespace MVC_Database.Controllers
         // GET: Db/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null || _context.People == null)
             {
                 return NotFound();
             }
 
-            var person = await _context.Person.FindAsync(id);
+            var person = await _context.People.FindAsync(id);
             if (person == null)
             {
                 return NotFound();
@@ -81,7 +81,7 @@ namespace MVC_Database.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,PhoneNumber,City")] Person person)
+        public async Task<IActionResult> Edit(int id, Person person)
         {
             if (id != person.Id)
             {
@@ -97,7 +97,7 @@ namespace MVC_Database.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PersonExists(person.Id))
+                    if (!PeopleExists(person.Id))
                     {
                         return NotFound();
                     }
@@ -114,12 +114,12 @@ namespace MVC_Database.Controllers
         // GET: Db/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null || _context.Person == null)
+            if (id == null || _context.People == null)
             {
                 return NotFound();
             }
 
-            var person = await _context.Person
+            var person = await _context.People
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (person == null)
             {
@@ -134,23 +134,23 @@ namespace MVC_Database.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            if (_context.Person == null)
+            if (_context.People == null)
             {
-                return Problem("Entity set 'MVC_DbContext.Person'  is null.");
+                return Problem("Entity set 'MVC_DbContext.People'  is null.");
             }
-            var person = await _context.Person.FindAsync(id);
+            var person = await _context.People.FindAsync(id);
             if (person != null)
             {
-                _context.Person.Remove(person);
+                _context.People.Remove(person);
             }
             
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool PersonExists(int id)
+        private bool PeopleExists(int id)
         {
-          return _context.Person.Any(e => e.Id == id);
+          return _context.People.Any(e => e.Id == id);
         }
     }
 }
