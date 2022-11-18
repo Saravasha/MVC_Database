@@ -4,14 +4,14 @@ namespace MVC_Data.ViewModels
 {
 public class PeopleViewModel
     {
-        public CreatePersonViewModel NewPerson { get; set; }
+        public CreatePersonViewModel NewPerson { get; set; } = new CreatePersonViewModel();
 
         public List<Person> People = new List<Person>();
-        public PeopleViewModel()
-        {
-            NewPerson = new CreatePersonViewModel();
-            //GetPeople();
-        }
+        //public PeopleViewModel()
+        //{
+        //    NewPerson = new CreatePersonViewModel();
+        //    //GetPeople();
+        //}
         
         // Seedar in lite dudes
         //public List<Person> GetPeople()

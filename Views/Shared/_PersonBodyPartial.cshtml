@@ -1,30 +1,35 @@
 ﻿@model MVC_Data.ViewModels.PeopleViewModel
 
 
-@if(@Model != null){
+@if (@Model != null)
+{
 
-    <div class="container">
+	<div class="container">
 
-        @foreach (var item in Model.People)
+		@foreach (var item in Model.People)
 
-        {
+		{
 
-        <div class="row">
-                <div class="col">
-                    <label asp-for="@item.Id"/>@item.Id
-                </div>
-            <div class="col">
-                <label asp-for="@item.Name"/>@item.Name
-            </div>
-            <div class="col"><label asp-for="@item.PhoneNumber"/>@item.PhoneNumber
-            </div>
-                <div class="col">
-                    <label asp-for="@item.City.Name"/>@item.City.Name
-            </div>
-                <div class="col">
-                    <label asp-for="@item.City.Country.Name" />@item.City.Country.Name
-                </div>
-        </div>
-        }
-    </div>
+			<div class="row">
+				<div class="col">
+					<label asp-for="@item.Id" />@item.Id
+				</div>
+				<div class="col">
+					<label asp-for="@item.Name" />@item.Name
+				</div>
+				<div class="col">
+					<label asp-for="@item.PhoneNumber" />@item.PhoneNumber
+				</div>
+				<div class="col">
+					<label asp-for="@item.City.Name" />@item.City.Name
+				</div>
+				<div class="col">
+					<label asp-for="@item.City.Country.Name" />@item.City.Country.Name
+				</div>
+				<div class="col">
+					<a asp-action="DeletePerson" class="btn btn-danger"  value="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete</a>
+				</div>					
+			</div>
+		}
+	</div>
 }

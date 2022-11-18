@@ -27,7 +27,6 @@ namespace MVC_Data.Controllers
             peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).ToList();
 
 
-
             return View(peopleViewModel);
         }
  
@@ -42,7 +41,7 @@ namespace MVC_Data.Controllers
             }
 
 
-            var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.Name.Contains(filterInput))).Include(c => c.City).ToList();
+            var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.PhoneNumber.Contains(filterInput)) || (x.City.Country.Name.Contains(filterInput)) || (x.Name.Contains(filterInput))).Include(c => c.City).ThenInclude(C => C.Country).ToList() ;
 
             PeopleViewModel filteredModel = new PeopleViewModel();
 
@@ -54,34 +53,34 @@ namespace MVC_Data.Controllers
                 return View("Index");
             }
 
-
-
             return View("Index", filteredModel);
         }
 
-        public IActionResult AddPerson(PersonViewModel m)
+        [HttpPost]
+        public IActionResult AddPerson(PeopleViewModel m)
         {
-            if (ModelState.IsValid)
+            ModelState.Remove("NewPerson.City");
+            if (ModelState.IsValid && m.NewPerson.CityId > 0)
             {
 
                 _context.People.Add(new Person()
                 {
                    
-                    Name = m.Name,
-                    PhoneNumber = m.PhoneNumber,
-                    CityId = m.CityId,
-
+                    Name = m.NewPerson.Name,
+                    PhoneNumber = m.NewPerson.PhoneNumber,
+                    CityId = m.NewPerson.CityId,
 
                 });
                 _context.SaveChanges();
 
-                ViewBag.Statement = $"{m.Name} has been added to the table!";
+                ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
             }
             else {
+                ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
                 ViewBag.Statement = "Please fill in the form above!";
+                return View("Index");
             }
-
-            return View("Index", peopleViewModel);
+            return RedirectToAction("Index");
         }
 
         public IActionResult DeletePerson(int id, string name)
@@ -104,8 +103,9 @@ namespace MVC_Data.Controllers
                     Person? p = peopleViewModel.People.FirstOrDefault(p => p.Id == id);
                     _context.People.Remove(p);
                     _context.SaveChanges();
-                    ViewBag.Statement = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
 
+                    TempData["Message"] = $" OMG! They killed {name} the {id}{OrdinalSuffixGetter(id)}! You bastards!";
+                    return RedirectToAction("Index");
                 }
                 catch (ArgumentOutOfRangeException aa)
                 {

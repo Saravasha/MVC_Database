@@ -1,53 +1,83 @@
 ﻿@model MVC_Data.ViewModels.PeopleViewModel
 
 @{
-    ViewData["Title"] = "People";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+	ViewData["Title"] = "People";
+	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>@ViewBag.Title</h1>
 
+@{
+	if (TempData.Peek("Message") != null)
+	{
+		<h3>@TempData.Peek("Message")</h3>
+		@TempData.Remove("Message");
+	}
+}
 
-<form class="container" method="post" asp-action="FilterPersonCity" asp-controller="Index">
-    <label>Search</label><br />
-    <input type="text" name="filterInput"/>
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
+@*search for person*@
+<div class="row">
+	<form class="container" method="post" asp-action="FilterPersonCity">
+		<label>Search</label>
+		<br />
+		<input type="text" name="filterInput" required />
+		<button class="btn btn-primary" type="submit">Submit</button>
+	</form>
+</div>
+@*add person*@
+<div class="row" >
+	<label>Add new Person</label>
+	<form class="container" method="post" asp-action="AddPerson">
+		<div class="col">
+			<label asp-for="NewPerson.Name"></label>
+		</div>
+		<div class="col">
+			<input type="text" class="col" asp-for="NewPerson.Name" placeholder="Full Name" />
+			<span asp-validation-for="NewPerson.Name"></span>
+		</div>
+		<div class="col">
+			<label asp-for="NewPerson.PhoneNumber"></label>
+		</div>
+		<div class="col">
+		<input type="text" class="col" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" />
+			<span asp-validation-for="NewPerson.PhoneNumber"></span>
+		</div>
+		<div class="col">
+			<label asp-for="NewPerson.CityId"></label>
+		</div>
+		<div class="col">
+			<select type="text" class="col" asp-for="NewPerson.CityId" asp-items="ViewBag.CityNames" required>
+				<option class="col" value="" selected disabled>Select City</option>
+			</select>
+			<span asp-validation-for="NewPerson.CityId"></span>
+		</div>
+		<button class="btn btn-primary" type="submit">Submit</button>
+	</form>
+</div>
+@*<input type="text" asp-for="NewPerson.CityId" placeholder="City Name" required />*@
 
-<form class="container" method="post" asp-action="AddPerson" asp-controller="Index">
-    <label>New User Form:</label>
-    <br />
-    <input type="text" asp-for="NewPerson.Name" placeholder="Full Name" required />
-    <input type="text" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" required />
-    <input type="text" asp-for="NewPerson.CityId" placeholder="City Name" required />
-
-@*<br />*@
-@*<div class="form-group row">*@
-        <select asp-for="NewPerson.CityId" class="form-control" asp-items="ViewBag.CityNames">
-    <label asp-for="NewPerson.CityId" class="col-sm-1 col-form-label">City</label>
-            <option value="" selected disabled>Select City</option>
-        </select>
-        <span asp-validation-for="NewPerson.CityId"></span>
-    @*<div class="col-sm-3">
-    </div>*@
-@*</div>*@
-    <button class="btn btn-primary" type="submit">Submit</button>
-</form>
+@*<label asp-for="NewPerson.CityId" class="col-sm-1 col-form-label">City</label>*@
+@*<span asp-validation-for="NewPerson.CityId"></span>*@
 <p>@ViewBag.Statement</p>
 
 
+@*<br />*@
+@*<div class="form-group row">*@
+@*<div class="col-sm-3">
+    </div>*@
+@*</div>*@
 @if (@Model != null)
 {
 
 
-<partial name="_PersonHeaderPartial" model=@Model/>
-<partial name="_PersonBodyPartial" model=@Model />
-    
+	<partial name="_PersonHeaderPartial" model=@Model />
+	<partial name="_PersonBodyPartial" model=@Model />
+
 }
 else
 {
-    <p>No results found.</p>
+	<p>No results found.</p>
 }
 <div>
-    <a asp-controller="Person" asp-action="Index">Refresh Table</a>
+	<a asp-controller="Person" asp-action="Index">Refresh Table</a>
 </div>
