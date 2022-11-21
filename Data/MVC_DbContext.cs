@@ -1,5 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC_Data.Models;
+using MVC_Database.Models;
+
 namespace MVC_Database.Data
 {
     public class MVC_DbContext : DbContext
@@ -13,6 +15,7 @@ namespace MVC_Database.Data
         public DbSet<Person> People { get; set; } = default!;
         public DbSet<City> Cities { get; set; } = default!;
         public DbSet<Country> Countries { get; set; } = default!;
+        public DbSet<Language> Languages { get; set; } = default!;
 
 
         protected override void OnModelCreating(ModelBuilder modelbuilder)
@@ -20,6 +23,10 @@ namespace MVC_Database.Data
             base.OnModelCreating(modelbuilder);
 
 
+
+            modelbuilder.Entity<Language>().HasData(new Language { Id = 1, Name = "Svenska" });
+            modelbuilder.Entity<Language>().HasData(new Language { Id = 2, Name = "'Murican" });
+            modelbuilder.Entity<Language>().HasData(new Language { Id = 3, Name = "Polski" });
 
             modelbuilder.Entity<Country>().HasData(new Country { Id = 1, Name = "Sweden" });
             modelbuilder.Entity<Country>().HasData(new Country { Id = 2, Name = "'Murica" });
@@ -32,6 +39,20 @@ namespace MVC_Database.Data
             modelbuilder.Entity<Person>().HasData(new Person { Id = 1, Name = "Siavash Gosheh", PhoneNumber = "xxxx-xxx666", CityId = 1 });
             modelbuilder.Entity<Person>().HasData(new Person { Id = 2, Name = "Maxwell T Bird", PhoneNumber = "Mr. Max Tv @ Youtube", CityId = 2 });
             modelbuilder.Entity<Person>().HasData(new Person { Id = 3, Name = "Nergal", PhoneNumber = "666", CityId = 3 });
+
+            modelbuilder.Entity<Person>()
+                .HasMany(l => l.Languages)
+                .WithMany(p => p.People)
+                .UsingEntity(j => j.HasData(new { LanguagesPerson = 1, PeopleId = 1 }));
+            modelbuilder.Entity<Person>()
+                .HasMany(l => l.Languages)
+                .WithMany(p => p.People)
+                .UsingEntity(j => j.HasData(new { LanguagesPerson = 2, PeopleId = 2 }));
+            modelbuilder.Entity<Person>()
+                .HasMany(l => l.Languages)
+                .WithMany(p => p.People)
+                .UsingEntity(j => j.HasData(new { LanguagesPerson = 3, PeopleId = 3 }));
+
         }
     }
 }

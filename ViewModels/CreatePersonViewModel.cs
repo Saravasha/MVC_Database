@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MVC_Data.Models;
+using MVC_Database.Models;
 
 namespace MVC_Data.ViewModels
 {
@@ -13,5 +14,7 @@ namespace MVC_Data.ViewModels
         public string PhoneNumber { get; set; }
         public int CityId { get; set; }
         public City City { get; set; }
+
+        public List<Language> Languages { get; set; } = new List<Language>(); 
     }
 }

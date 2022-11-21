@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MVC_Database.Models;
 
 namespace MVC_Data.Models
 {
@@ -13,6 +14,8 @@ namespace MVC_Data.Models
         
         public int CityId { get; set; }
         public City City { get; set; }
+
+        public List<Language> Languages { get; set; } = new List<Language>();
 
     }
 }

@@ -25,7 +25,7 @@
 	</form>
 </div>
 @*add person*@
-<div class="row" >
+<div class="row">
 	<label>Add new Person</label>
 	<form class="container" method="post" asp-action="AddPerson">
 		<div class="col">
@@ -50,6 +50,12 @@
 				<option class="col" value="" selected disabled>Select City</option>
 			</select>
 			<span asp-validation-for="NewPerson.CityId"></span>
+		</div>
+				<div class="col">
+			<select type="text" class="col" asp-for="NewPerson.Languages" asp-items="ViewBag.LanguageNames" required>
+				<option class="col" value="" selected disabled>Select City</option>
+			</select>
+			<span asp-validation-for="NewPerson.Languages"></span>
 		</div>
 		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>

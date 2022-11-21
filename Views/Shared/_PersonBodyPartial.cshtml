@@ -27,6 +27,9 @@
 					<label asp-for="@item.City.Country.Name" />@item.City.Country.Name
 				</div>
 				<div class="col">
+					<label asp-for="@item.Languages" />@item.Languages
+				</div>
+				<div class="col">
 					<a asp-action="DeletePerson" class="btn btn-danger"  value="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete</a>
 				</div>					
 			</div>

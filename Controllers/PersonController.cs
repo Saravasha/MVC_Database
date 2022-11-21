@@ -69,6 +69,7 @@ namespace MVC_Data.Controllers
                     Name = m.NewPerson.Name,
                     PhoneNumber = m.NewPerson.PhoneNumber,
                     CityId = m.NewPerson.CityId,
+                    Languages = m.NewPerson.Languages
 
                 });
                 _context.SaveChanges();
@@ -77,6 +78,7 @@ namespace MVC_Data.Controllers
             }
             else {
                 ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
+                //ViewBag.LanguageNames = new SelectList(_context.Languages, "Id", "Name");
                 ViewBag.Statement = "Please fill in the form above!";
                 return View("Index");
             }
