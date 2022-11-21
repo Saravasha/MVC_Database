@@ -24,7 +24,7 @@ namespace MVC_Data.Controllers
         public IActionResult Index()
         {
             ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
-            ViewBag.LanguageNames = new SelectList(_context.Cities, "Id", "Name");
+            ViewBag.LanguageNames = new SelectList(_context.Languages, "Id", "Name");
             peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
 
 
