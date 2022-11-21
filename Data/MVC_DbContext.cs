@@ -43,15 +43,15 @@ namespace MVC_Database.Data
             modelbuilder.Entity<Person>()
                 .HasMany(l => l.Languages)
                 .WithMany(p => p.People)
-                .UsingEntity(j => j.HasData(new { LanguagesPerson = 1, PeopleId = 1 }));
+                .UsingEntity(j => j.HasData(new { LanguagesId = 1, PeopleId = 1 }));
             modelbuilder.Entity<Person>()
                 .HasMany(l => l.Languages)
                 .WithMany(p => p.People)
-                .UsingEntity(j => j.HasData(new { LanguagesPerson = 2, PeopleId = 2 }));
+                .UsingEntity(j => j.HasData(new { LanguagesId = 2, PeopleId = 2 }));
             modelbuilder.Entity<Person>()
                 .HasMany(l => l.Languages)
                 .WithMany(p => p.People)
-                .UsingEntity(j => j.HasData(new { LanguagesPerson = 3, PeopleId = 3 }));
+                .UsingEntity(j => j.HasData(new { LanguagesId = 3, PeopleId = 3 }));
 
         }
     }

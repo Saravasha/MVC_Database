@@ -11,11 +11,11 @@
 	if (TempData.Peek("Message") != null)
 	{
 		<h3>@TempData.Peek("Message")</h3>
-		@TempData.Remove("Message");
+		@TempData.Remove("Message")
+		;
 	}
 }
 
-@*search for person*@
 <div class="row">
 	<form class="container" method="post" asp-action="FilterPersonCity">
 		<label>Search</label>
@@ -24,7 +24,7 @@
 		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>
 </div>
-@*add person*@
+
 <div class="row">
 	<label>Add new Person</label>
 	<form class="container" method="post" asp-action="AddPerson">
@@ -39,7 +39,7 @@
 			<label asp-for="NewPerson.PhoneNumber"></label>
 		</div>
 		<div class="col">
-		<input type="text" class="col" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" />
+			<input type="text" class="col" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" />
 			<span asp-validation-for="NewPerson.PhoneNumber"></span>
 		</div>
 		<div class="col">
@@ -51,7 +51,7 @@
 			</select>
 			<span asp-validation-for="NewPerson.CityId"></span>
 		</div>
-				<div class="col">
+		<div class="col">
 			<select type="text" class="col" asp-for="NewPerson.Languages" asp-items="ViewBag.LanguageNames" required>
 				<option class="col" value="" selected disabled>Select City</option>
 			</select>
@@ -60,18 +60,9 @@
 		<button class="btn btn-primary" type="submit">Submit</button>
 	</form>
 </div>
-@*<input type="text" asp-for="NewPerson.CityId" placeholder="City Name" required />*@
-
-@*<label asp-for="NewPerson.CityId" class="col-sm-1 col-form-label">City</label>*@
-@*<span asp-validation-for="NewPerson.CityId"></span>*@
 <p>@ViewBag.Statement</p>
 
 
-@*<br />*@
-@*<div class="form-group row">*@
-@*<div class="col-sm-3">
-    </div>*@
-@*</div>*@
 @if (@Model != null)
 {
 
