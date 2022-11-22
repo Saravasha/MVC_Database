@@ -4,13 +4,12 @@ using MVC_Data.Models;
 using MVC_Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using MVC_Database.ViewModels;
 
 namespace MVC_Data.Controllers
 {
     public class PersonController : Controller
     {
-        
+
         private static PeopleViewModel peopleViewModel = new PeopleViewModel();
         readonly MVC_DbContext _context; // creates a readonly of DbContext
 
@@ -19,7 +18,7 @@ namespace MVC_Data.Controllers
             _context = context;
         }
 
-  
+
 
         public IActionResult Index()
         {
@@ -30,7 +29,7 @@ namespace MVC_Data.Controllers
 
             return View(peopleViewModel);
         }
- 
+
 
         [HttpPost]
         public IActionResult FilterPersonCity(string filterInput)
@@ -42,7 +41,7 @@ namespace MVC_Data.Controllers
             }
 
 
-            var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.PhoneNumber.Contains(filterInput)) || (x.City.Country.Name.Contains(filterInput)) || (x.Name.Contains(filterInput))).Include(c => c.City).ThenInclude(C => C.Country).ToList() ;
+            var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.PhoneNumber.Contains(filterInput)) || (x.City.Country.Name.Contains(filterInput)) || (x.Name.Contains(filterInput))).Include(c => c.City).ThenInclude(C => C.Country).ToList();
 
             PeopleViewModel filteredModel = new PeopleViewModel();
 
@@ -66,18 +65,19 @@ namespace MVC_Data.Controllers
 
                 _context.People.Add(new Person()
                 {
-                   
                     Name = m.NewPerson.Name,
                     PhoneNumber = m.NewPerson.PhoneNumber,
                     CityId = m.NewPerson.CityId,
                     Languages = m.NewPerson.Languages
-
                 });
+
+
                 _context.SaveChanges();
 
-                ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
+                //ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
             }
-            else {
+            else
+            {
                 ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
                 ViewBag.LanguageNames = new SelectList(_context.Languages, "Id", "Name");
                 ViewBag.Statement = "Please fill in the form above!";
@@ -85,6 +85,8 @@ namespace MVC_Data.Controllers
             }
             return RedirectToAction("Index");
         }
+
+      
 
         public IActionResult DeletePerson(int id, string name)
         {

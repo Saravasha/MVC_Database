@@ -1,4 +1,8 @@
 ﻿@model MVC_Data.ViewModels.PeopleViewModel
+@{
+	string langs = "";
+
+}
 
 
 @if (@Model != null)
@@ -26,9 +30,16 @@
 				<div class="col">
 					<label asp-for="@item.City.Country.Name" />@item.City.Country.Name
 				</div>
+
+				@foreach (var lang in item.Languages) {
+						langs = langs + lang.Name + " ";
+					}
 				<div class="col">
-					<label asp-for="@item.Languages" />@item.Languages
+					<p>
+					@langs
+					</p>
 				</div>
+				@{ langs = ""; }
 				<div class="col">
 					<a asp-action="DeletePerson" class="btn btn-danger"  value="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete</a>
 				</div>					

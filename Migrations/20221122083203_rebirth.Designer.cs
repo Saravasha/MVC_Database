@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MVC_Database.Migrations
 {
     [DbContext(typeof(MVC_DbContext))]
-    [Migration("20221118135236_zigiplz")]
-    partial class zigiplz
+    [Migration("20221122083203_rebirth")]
+    partial class rebirth
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,6 +22,38 @@ namespace MVC_Database.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.Property<int>("LanguagesId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PeopleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("LanguagesId", "PeopleId");
+
+                    b.HasIndex("PeopleId");
+
+                    b.ToTable("LanguagePerson");
+
+                    b.HasData(
+                        new
+                        {
+                            LanguagesId = 1,
+                            PeopleId = 1
+                        },
+                        new
+                        {
+                            LanguagesId = 2,
+                            PeopleId = 2
+                        },
+                        new
+                        {
+                            LanguagesId = 3,
+                            PeopleId = 3
+                        });
+                });
 
             modelBuilder.Entity("MVC_Data.Models.City", b =>
                 {
@@ -146,6 +178,55 @@ namespace MVC_Database.Migrations
                             Name = "Nergal",
                             PhoneNumber = "666"
                         });
+                });
+
+            modelBuilder.Entity("MVC_Database.Models.Language", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Languages");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Svenska"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "'Murican"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Polski"
+                        });
+                });
+
+            modelBuilder.Entity("LanguagePerson", b =>
+                {
+                    b.HasOne("MVC_Database.Models.Language", null)
+                        .WithMany()
+                        .HasForeignKey("LanguagesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MVC_Data.Models.Person", null)
+                        .WithMany()
+                        .HasForeignKey("PeopleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MVC_Data.Models.City", b =>

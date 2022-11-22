@@ -1,8 +1,6 @@
 ﻿@model MVC_Data.ViewModels.PeopleViewModel
-
 @{
-	ViewData["Title"] = "People";
-	Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "AddLanguagePerson";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -26,30 +24,10 @@
 </div>
 
 <div class="row">
-	<label>Add new Person</label>
-	<form class="container" method="post" asp-action="AddPerson">
+	<label>Add new Language to Person</label>
+	<form class="container" method="post" asp-action="AddLanguagePerson">
 		<div class="col">
 			<label asp-for="NewPerson.Name"></label>
-		</div>
-		<div class="col">
-			<input type="text" class="col" asp-for="NewPerson.Name" placeholder="Full Name" />
-			<span asp-validation-for="NewPerson.Name"></span>
-		</div>
-		<div class="col">
-			<label asp-for="NewPerson.PhoneNumber"></label>
-		</div>
-		<div class="col">
-			<input type="text" class="col" asp-for="NewPerson.PhoneNumber" placeholder="Phone Number" />
-			<span asp-validation-for="NewPerson.PhoneNumber"></span>
-		</div>
-		<div class="col">
-			<label asp-for="NewPerson.CityId"></label>
-		</div>
-		<div class="form-control">
-			<select type="text" class="col" asp-for="NewPerson.CityId" asp-items="ViewBag.CityNames" required>
-				<option class="col" value="" selected disabled>Select City</option>
-			</select>
-			<span asp-validation-for="NewPerson.CityId"></span>
 		</div>
 		<div class="form-control">
 			<select name="languages" class="col" asp-items="ViewBag.LanguageNames" multiple>
