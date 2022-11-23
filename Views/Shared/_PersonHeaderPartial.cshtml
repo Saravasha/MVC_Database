@@ -1,36 +1,28 @@
-﻿@model MVC_Data.ViewModels.PeopleViewModel
+﻿@model MVC_Data.ViewModels.CreatePeopleViewModel
 
 @{
 
 }
 
-@*<h1>@ViewBag.Title</h1>*@
-
-@*<p>@ViewBag.Statement</p>*@
-
 @if (@Model != null)
 {
-    <div class="row">
-        <div class="col">
-            @(Html.DisplayNameFor(model => model.NewPerson.City.Id))
-        </div>
-        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Name))
-        </div>
-        <div class="col">@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))
-        </div>
-        <div class="col">
-            @(Html.DisplayNameFor(model => model.NewPerson.City))
-        </div>
-        <div class="col">
-            @(Html.DisplayNameFor(model => model.NewPerson.City.Country))
-        </div>
-        <div class="col">
-            @(Html.DisplayNameFor(model => model.NewPerson.Languages))
-        </div>
-        <div class="col"></div>
-    </div>
+	<div class="row">
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City.Id))
+		</div>
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Name))
+		</div>
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))
+		</div>
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City))
+		</div>
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City.Country))
+		</div>
+		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Languages))
+		</div>
+		<div class="col">&nbsp;</div>
+	</div>
 }
 else
 {
-    <p>No results found.</p>
+	<p>No results found.</p>
 }

@@ -7,7 +7,7 @@ namespace MVC_Data.Controllers
 {
     public class AjaxController : Controller
     {
-        public static PeopleViewModel person = new PeopleViewModel();
+        public static CreatePeopleViewModel person = new CreatePeopleViewModel();
 
 
         public IActionResult Index()
@@ -27,7 +27,7 @@ namespace MVC_Data.Controllers
             var filteredData = person.People.Where(x => x.Id == id).ToList();
 
 
-            PeopleViewModel filteredModel = new PeopleViewModel();
+            CreatePeopleViewModel filteredModel = new CreatePeopleViewModel();
 
 
             filteredModel.People = filteredData;

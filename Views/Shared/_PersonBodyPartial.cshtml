@@ -1,4 +1,4 @@
-﻿@model MVC_Data.ViewModels.PeopleViewModel
+﻿@model CreatePeopleViewModel
 @{
 	string langs = "";
 
@@ -34,7 +34,7 @@
 				@foreach (var lang in item.Languages) {
 						langs = langs + lang.Name + " ";
 					}
-				<div class="col">
+				<div class="">
 					<p>
 					@langs
 					</p>

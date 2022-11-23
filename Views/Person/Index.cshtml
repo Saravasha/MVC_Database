@@ -1,4 +1,4 @@
-﻿@model MVC_Data.ViewModels.PeopleViewModel
+﻿@model MVC_Data.ViewModels.CreatePeopleViewModel
 
 @{
 	ViewData["Title"] = "People";
@@ -27,7 +27,7 @@
 
 <div class="row">
 	<label>Add new Person</label>
-	<form class="container" method="post" asp-action="AddPerson">
+	<form class="container" method="post"  asp-controller="Person" asp-action="AddPerson">
 		<div class="col">
 			<label asp-for="NewPerson.Name"></label>
 		</div>
@@ -43,21 +43,15 @@
 			<span asp-validation-for="NewPerson.PhoneNumber"></span>
 		</div>
 		<div class="col">
-			<label asp-for="NewPerson.CityId"></label>
+			<label asp-for="NewPerson.CityId">City</label>
 		</div>
-		<div class="form-control">
+		<div class="col">
 			<select type="text" class="col" asp-for="NewPerson.CityId" asp-items="ViewBag.CityNames" required>
 				<option class="col" value="" selected disabled>Select City</option>
 			</select>
 			<span asp-validation-for="NewPerson.CityId"></span>
-		</div>
-		<div class="form-control">
-			<select name="languages" class="col" asp-items="ViewBag.LanguageNames" multiple>
-				<option class="col" value="" selected disabled>Select Language</option>
-			</select>
-			<span asp-validation-for="NewPerson.Languages"></span>
-		</div>
 		<button class="btn btn-primary" type="submit">Submit</button>
+		</div>
 	</form>
 </div>
 <p>@ViewBag.Statement</p>

@@ -6,10 +6,9 @@ namespace MVC_Data.ViewModels
 {
     public class CreateCountryViewModel
     {
-        [Key]
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public List<City> Cities { get; set; } = new List<City>();
+        public CountryViewModel NewCountry { get; set; } = new CountryViewModel();
+
+        public List<Country> Countries = new List<Country>();
 
     }
 }

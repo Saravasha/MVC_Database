@@ -1,13 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
-using MVC_Data.Models;
-using MVC_Database.Models;
+﻿using MVC_Database.Models;
 
 namespace MVC_Data.ViewModels
 {
     public class CreateLanguageViewModel
     {
-        [Required]
-        public string Name { get; set; }
-        public List<Person> People { get; set; } = new List<Person>(); 
+        public LanguageViewModel NewLanguage { get; set; } = new LanguageViewModel();
+
+        public List<Language> Languages = new List<Language>();
     }
 }

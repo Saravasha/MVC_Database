@@ -1,28 +1,20 @@
-﻿using MVC_Data.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using MVC_Data.Models;
+using MVC_Database.Models;
 
 namespace MVC_Data.ViewModels
 {
-public class PeopleViewModel
+    public class PeopleViewModel
     {
-        public CreatePersonViewModel NewPerson { get; set; } = new CreatePersonViewModel();
 
-        public List<Person> People = new List<Person>();
-        //public PeopleViewModel()
-        //{
-        //    NewPerson = new CreatePersonViewModel();
-        //    //GetPeople();
-        //}
-        
-        // Seedar in lite dudes
-        //public List<Person> GetPeople()
-        //{
+        [Required]
+        public string Name { get; set; }
+        [Required]
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; }
+        public int CityId { get; set; }
+        public City City { get; set; }
 
-            //People.Add(new Person { Id = 1, Name = "Siavash Gosheh", PhoneNumber = "xxxx-xxx666", City = new City { Id = 1 } } );
-            //People.Add(new Person { Id = 2, Name = "Maxwell T Bird", PhoneNumber = "Mr. Max Tv @ Youtube", City = new City { Id = 2 } }); ;
-            //People.Add(new Person { Id = 3, Name = "Nergal", PhoneNumber = "666", City = new City { Id = 3 } }); ;
-            //return People;
-
-
-        //}
+        public List<Language> Languages { get; set; } = new List<Language>(); 
     }
 }

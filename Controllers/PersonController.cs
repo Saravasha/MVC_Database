@@ -10,7 +10,7 @@ namespace MVC_Data.Controllers
     public class PersonController : Controller
     {
 
-        private static PeopleViewModel peopleViewModel = new PeopleViewModel();
+        private static CreatePeopleViewModel peopleViewModel = new CreatePeopleViewModel();
         readonly MVC_DbContext _context; // creates a readonly of DbContext
 
         public PersonController(MVC_DbContext context)
@@ -23,7 +23,7 @@ namespace MVC_Data.Controllers
         public IActionResult Index()
         {
             ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
-            ViewBag.LanguageNames = new SelectList(_context.Languages, "Id", "Name");
+
             peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
 
 
@@ -43,7 +43,7 @@ namespace MVC_Data.Controllers
 
             var filteredData = _context.People.Where(x => x.City.Name.Contains(filterInput) || (x.PhoneNumber.Contains(filterInput)) || (x.City.Country.Name.Contains(filterInput)) || (x.Name.Contains(filterInput))).Include(c => c.City).ThenInclude(C => C.Country).ToList();
 
-            PeopleViewModel filteredModel = new PeopleViewModel();
+            CreatePeopleViewModel filteredModel = new CreatePeopleViewModel();
 
 
             filteredModel.People = filteredData;
@@ -57,7 +57,7 @@ namespace MVC_Data.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddPerson(PeopleViewModel m)
+        public IActionResult AddPerson(CreatePeopleViewModel m)
         {
             ModelState.Remove("NewPerson.City");
             if (ModelState.IsValid && m.NewPerson.CityId > 0)
@@ -68,7 +68,7 @@ namespace MVC_Data.Controllers
                     Name = m.NewPerson.Name,
                     PhoneNumber = m.NewPerson.PhoneNumber,
                     CityId = m.NewPerson.CityId,
-                    Languages = m.NewPerson.Languages
+
                 });
 
 
@@ -79,7 +79,6 @@ namespace MVC_Data.Controllers
             else
             {
                 ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
-                ViewBag.LanguageNames = new SelectList(_context.Languages, "Id", "Name");
                 ViewBag.Statement = "Please fill in the form above!";
                 return View("Index");
             }

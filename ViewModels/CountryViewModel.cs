@@ -8,5 +8,6 @@ namespace MVC_Data.ViewModels
         [Required]
         [Display(Name = "Country Name")]
         public string Name { get; set; }
+        public List<City> Cities { get; set; } = new List<City>();
     }
 }
