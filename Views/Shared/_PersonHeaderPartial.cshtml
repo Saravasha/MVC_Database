@@ -7,17 +7,24 @@
 @if (@Model != null)
 {
 	<div class="row">
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City.Id))
+		<div class="col">
+			<b>
+		@(Html.DisplayNameFor(model => model.NewPerson.City.Id))
+		</b>
 		</div>
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Name))
+		<div class="col"><b>@(Html.DisplayNameFor(model => model.NewPerson.Name))</b>
 		</div>
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))
+		<div class="col">
+			<b>@(Html.DisplayNameFor(model => model.NewPerson.PhoneNumber))</b>
 		</div>
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City))
+		<div class="col">
+			<b>@(Html.DisplayNameFor(model => model.NewPerson.City))</b>
 		</div>
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.City.Country))
+		<div class="col">
+			<b>@(Html.DisplayNameFor(model => model.NewPerson.City.Country))</b>
 		</div>
-		<div class="col">@(Html.DisplayNameFor(model => model.NewPerson.Languages))
+		<div class="col">
+			<b>@(Html.DisplayNameFor(model => model.NewPerson.Languages))</b>
 		</div>
 		<div class="col">&nbsp;</div>
 	</div>

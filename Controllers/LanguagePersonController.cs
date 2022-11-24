@@ -47,6 +47,7 @@ namespace MVC_Database.Controllers
                 }
             }
 
+            TempData["Message"] = $"Added languages to {person.Name}";
             return RedirectToAction("AddLanguagePerson");
 
         }

@@ -22,9 +22,9 @@ namespace MVC_Data.Controllers
 
         public IActionResult Index()
         {
+            peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
             ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
 
-            peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
 
 
             return View(peopleViewModel);
@@ -74,7 +74,7 @@ namespace MVC_Data.Controllers
 
                 _context.SaveChanges();
 
-                //ViewBag.Statement = $"{m.NewPerson.Name} has been added to the table!";
+                TempData["Message"] = $"{m.NewPerson.Name} has been added to the table!";
             }
             else
             {

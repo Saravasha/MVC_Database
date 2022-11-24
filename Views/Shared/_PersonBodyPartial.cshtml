@@ -34,14 +34,14 @@
 				@foreach (var lang in item.Languages) {
 						langs = langs + lang.Name + " ";
 					}
-				<div class="">
+				<div class="col">
 					<p>
 					@langs
 					</p>
 				</div>
 				@{ langs = ""; }
 				<div class="col">
-					<a asp-action="DeletePerson" class="btn btn-danger"  value="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete</a>
+					<a asp-action="DeletePerson" class="btn btn-danger btn-sm"  value="Delete" asp-route-id="@item.Id" asp-route-name="@item.Name">Delete</a>
 				</div>					
 			</div>
 		}
