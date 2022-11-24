@@ -3,6 +3,7 @@ using MVC_Database.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MVC_Data.ViewModels;
 using Microsoft.EntityFrameworkCore;
+using MVC_Database.Models;
 
 namespace MVC_Database.Controllers
 {
@@ -16,6 +17,7 @@ namespace MVC_Database.Controllers
             _context = context;
         }
 
+        // Skicka DropdownList PersonItem från View till Controller som sedan uppdaterar språken som inte finns tillgängliga hos Personen. Controller gör redan kända språk till disabled och sedan passeras språklistan till controllern igen.
 
         public IActionResult AddLanguagePerson()
         {
@@ -30,9 +32,14 @@ namespace MVC_Database.Controllers
         {
 
             var person = _context.People.FirstOrDefault(x => x.Id == int.Parse(personId));
+            var langsToString = "";
+            List<string> langList = new List<string>();
             foreach (var lang in languages)
             {
                 var language = _context.Languages.FirstOrDefault(x => x.Id.Equals(int.Parse(lang)));
+
+                langList.Add(language.Name);
+                langsToString = string.Join(", ", langList);
 
                 try
                 {
@@ -43,11 +50,10 @@ namespace MVC_Database.Controllers
                 catch (DbUpdateException e)
                 {
 
-                    ViewBag.Statement = e.Message;
+                    ViewBag.Message = $"{e.Message} something went wrong";
                 }
             }
-
-            TempData["Message"] = $"Added languages to {person.Name}";
+            TempData["Message"] = $"Added {langsToString} to {person.Name}";
             return RedirectToAction("AddLanguagePerson");
 
         }

@@ -22,8 +22,8 @@ namespace MVC_Data.Controllers
 
         public IActionResult Index()
         {
-            peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
             ViewBag.CityNames = new SelectList(_context.Cities, "Id", "Name");
+            peopleViewModel.People = _context.People.Include(c => c.City).ThenInclude(z => z.Country).Include(l => l.Languages).ToList();
 
 
 
@@ -85,7 +85,7 @@ namespace MVC_Data.Controllers
             return RedirectToAction("Index");
         }
 
-      
+
 
         public IActionResult DeletePerson(int id, string name)
         {
